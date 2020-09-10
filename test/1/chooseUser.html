@@ -1,0 +1,63 @@
+<html manifest="IGNORE.manifest" data-dpr="1" style="font-size: 37.52px;">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<title>选择用户类型</title>
+	<link href="./assets/static/css/app.css" rel="stylesheet" />
+	<link href="./assets/static/css/style.css" rel="stylesheet" />
+	<script src="./assets/weui/js/jquery.min.js"></script>
+	<script src="./assets/static/js/functions.js"></script>
+</head>
+<script>
+	//获取参数值并存于本地缓存
+	var timestamp = new Date().getTime();
+	var id = getQueryVariable('id');
+	if(id != ''){
+		localStorage.setItem("id", id);
+		localStorage.setItem("id_timestamp",timestamp);
+	}
+	/*$(function(){
+		checkLogin();
+	});*/
+</script>
+<body style="font-size: 12px;">
+	<div id="app">
+		<div class="choice">
+			<p class="text">请选择您的身份</p>
+			<div class="bg" style="margin-top: 1.64rem;" onclick="location.href='merchant.html'">
+				<div class="yd-flexbox yd-flexbox-horizontal" style="height: 100%;">
+					<img src="./assets/static/img/shanghu.png" class="icon" />
+					<div class="yd-flexbox-item yd-flexbox-item-center" style="margin-left: 0.43rem;">
+						<p class="text_big">我是企业商户</p>
+						<p class="text_small">需提交营业执照等信息</p>
+					</div>
+					<img src="./assets/static/img/jiantou.png" class="jiantou" />
+				</div>
+			</div>
+			<div class="bg" style="margin-top: 0.8rem;"  onclick="location.href='xiaov.html'">
+				<div class="yd-flexbox yd-flexbox-horizontal" style="height: 100%;">
+					<img src="./assets/static/img/xiaowei.png" class="icon" />
+					<div class="yd-flexbox-item yd-flexbox-item-center" style="margin-left: 0.43rem;">
+						<p class="text_big">我是小微商户</p>
+						<p class="text_small">需提交营业执照等信息</p>
+					</div>
+					<img src="./assets/static/img/jiantou.png" class="jiantou" />
+				</div>
+			</div>
+			<div class="bg" style="margin-top: 0.8rem;" onclick="location.href='personal.html'">
+				<div class="yd-flexbox yd-flexbox-horizontal" style="height: 100%;">
+					<img src="./assets/static/img/geren.png" class="icon" />
+					<div class="yd-flexbox-item yd-flexbox-item-center" style="margin-left: 0.43rem;">
+						<p class="text_big">我是个人</p>
+						<p class="text_small" style="color: rgb(255, 255, 255);"></p>
+					</div>
+					<img src="./assets/static/img/jiantou.png" class="jiantou" />
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

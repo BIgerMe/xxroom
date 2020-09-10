@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>商戶信息</title>
+    <link rel="stylesheet" href="./assets/weui/css/weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/style.css">
+    <link rel="stylesheet" href="./assets/weui/css/modal.css">
+    <link rel="stylesheet" href="./assets/weui/css/base.css">
+    <script src="./assets/weui/js/jquery.min.js"></script>
+    <script src="./assets/weui/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/weui/js/city-picker.min.js" charset="utf-8"></script>
+    <script src="./assets/static/js/functions.js"></script>
+</head>
+<!--<script> $(function(){checkLogin();});</script>-->
+<style type="text/css">
+    .license{
+        background-image: url("./assets/static/img/yingyezhizhao.png");
+    }
+    .handIdCard{
+        background-image: url("./assets/static/img/shouchisfz.png");
+    }
+    .idFront{
+        background-image: url("./assets/static/img/sfzz.png");
+    }
+    .idBack{
+        background-image: url("./assets/static/img/sfzf.png");
+    }
+    .cardFront{
+        background-image: url("./assets/static/img/card.png");
+    }
+    .doorPhoto{
+        background-image: url("./assets/static/img/mentou.png");
+    }
+    .cashierPhoto{
+        background-image: url("./assets/static/img/cash.png");
+    }
+    .contentPhoto{
+        background-image: url("./assets/static/img/jingying.png");
+    }
+</style>
+<body>
+<h3 class="header">商户信息</h3>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">商户名称</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text"  id="mercnm"  placeholder="输入商户名称">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">联系人名称</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="stoeCntNm"  placeholder="输入联系人">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">联系电话</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="stoeCntTel"  placeholder="输入人电话">
+        </div>
+    </div>
+    <div class="weui-cells__title">选择商户分类</div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd" style="display: inline-block">
+            <select style="width: 31%" id="first_cate">
+                <option value="0">请选择</option>
+            </select>
+            <select  style="width: 31%" id="second_cate">
+                <option value="0">请选择</option>
+            </select>
+            <select  style="width: 31%" id="third_cate">
+                <option value="0">请选择</option>
+            </select>
+        </div>
+    </div>
+    <!-- <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">门店名称</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="scanStoeCnm" placeholder="输入门店名称">
+        </div>
+    </div> -->
+    <div class="weui-cells__title">商户地址</div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd" style="display: inline-block">
+            <select style="width: 31%" id="license_p">
+                <option value="0">请选择</option>
+            </select>
+            <select  style="width: 31%" id="license_c">
+                <option value="0">请选择</option>
+            </select>
+            <select  style="width: 31%" id="license_d">
+                <option value="0">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="stoeAdds" placeholder="输入详细地址">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">结算人信息</div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">身份证号</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="icrpIdNo"  placeholder="请输入结算人身份证号">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">身份证有效期</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input date-picker" id="crpExpDtTmp" type="text" value="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">身份证人像面</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file idFront"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="idFront" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">身份证国徽面</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file idBack"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="idBack" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">结算银行卡</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="stlOac"  placeholder="输入结算银行卡号">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">户名</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="bakAcnm" type="text" value="输入户名">
+        </div>
+    </div>
+    
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">开户行</label></div>
+        <div class="weui-cell__bd">
+            <p class="weui-input" id="wcLbnkNo" value="" onclick="myopendiv();">选择开户行</p>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">银行卡正面</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file cardFront"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="cardFront" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹窗内容-->
+    <div id="modal-backdrop" class="modal-backdrop"></div>
+    <div id="myModal" class="myModal">
+        <div class="modal-header">
+            <button type="button" class="modal-close" onClick="myclosediv();">×</button>
+            <div id="myModalLabel">搜索开户行</div>
+            <div class="weui-search-bar" id="searchBar" style="margin-top: 10px;padding:0">
+                    <div class="weui-search-bar__box" style="padding-left:30px;padding-right: 5px">
+                        <i class="weui-icon-search"></i>
+                        <input type="search" class="weui-search-bar__input" id="searchcoms" data-filter="true" placeholder="" required="" style="width: 80%;">
+                        <button type="button" class="" style="display: inline-block">搜索</button>
+                    </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="weui-cells weui-cells_access resultlist">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">上传相关资料</div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">手持身份证照</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file handIdCard"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="handIdCard" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">结算人站门头照</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file doorPhoto"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="doorPhoto" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+    	<div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">收银台照</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file cashierPhoto"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="cashierPhoto" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">经营内容照</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                        <li class="weui-uploader_file contentPhoto"></li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input class="weui-uploader__input js_file" type="file" id="contentPhoto" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">邀请码</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="inviteCode"  placeholder="输入邀请码">
+        </div>
+    </div>
+    <label for="weuiAgree" class="weui-agree">
+        <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+        <span class="weui-agree__text">
+        确认已阅读并同意签订<a href="javascript:void(0);">《相关条款》</a>
+        </span>
+    </label>
+    <div style="padding:10px;">
+        <a href="javascript:;" class="weui-btn weui-btn_primary">提 交</a>
+    </div>
+</div>
+</body>
+<script>
+    var id = localStorage.getItem("id");
+    if(id){
+        var timestamp = new Date().getTime();
+        let oldt = localStorage.getItem("id_timestamp");
+        if(!oldt || timestamp - oldt  > 60000){
+            //2分钟有效期
+            localStorage.removeItem('id');
+            localStorage.removeItem('id_timestamp');
+        }else{
+            $("#inviteCode").parent().parent().css('display','none');
+        }
+    }
+    //当前年月日
+    var myDate = new Date;
+    var year = myDate.getFullYear(); //获取当前年
+    var mon = myDate.getMonth() + 1; //获取当前月
+    var date = myDate.getDate();
+    $(".date-picker").calendar({
+        minDate: year + '-' + mon + '-' + date
+    });
+
+    var mcc = secmcc = thirdmcc = '';
+    var license_p = license_c = license_d = '';
+    $(function() {
+        //区域
+        $.ajax({
+            url: config.requestUrl+'/incom-api/incom/queryArea',
+            type:'GET',
+            data:{},
+            contentType:"text/html;charset=utf8",
+            dateType:"json",
+            success:function(ret,status){
+                license_p = ret.citys;
+                let first_option_html = '';
+                $.each(license_p,function(k,v){
+                    first_option_html += "<option value='"+v.id+"'>"+v.label+"</option>"
+                });
+                $("#license_p").append(first_option_html);
+            },
+        });
+        //分类
+        $.ajax({
+            url: config.requestUrl+'/incom-api/incom/queryMcc',
+            type:'GET',
+            data:{},
+            contentType:"text/html;charset=utf8",
+            dateType:"json",
+            success:function(ret,status){
+                mcc = ret.mcc;
+                var first_option_html = '';
+                $.each(mcc,function(k,v){
+                    first_option_html += "<option value='"+v.id+"'>"+v.label+"</option>"
+                });
+                $("#first_cate").append(first_option_html);
+            },
+        });
+
+        // 允许上传的图片类型
+        var allowTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+        // 1024KB，也就是 1MB
+        var maxSize = 1024 * 512;
+        // 图片最大宽度
+        var maxWidth = 1920;
+
+        $('.js_file').on('change', function(event) {
+            var _this = $(this);
+            var _that = _this.parent().prev();
+            var files = event.target.files;
+            // 如果没有选中文件，直接返回
+            if (files.length === 0) {
+                return;
+            }
+
+            for (var i = 0, len = files.length; i < len; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+
+                // 如果类型不在允许的类型范围内
+                if (allowTypes.indexOf(file.type) === -1) {
+                    $.toptip('只支持图片格式', 'error');
+                    continue;
+                }
+                if (file.size > maxSize) {
+                    $.toptip('图片尺寸不能大于500K', 'error');
+                    continue;
+                }
+
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.onload = function() {
+                        // 不要超出最大宽度
+                        var w = Math.min(maxWidth, img.width);
+                        // 高度按比例计算
+                        var h = img.height * (w / img.width);
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+                        // 设置 canvas 的宽度和高度
+                        canvas.width = w;
+                        canvas.height = h;
+                        ctx.drawImage(img, 0, 0, w, h);
+                        var base64 = canvas.toDataURL('image/png');
+
+                        // 插入到预览区
+                        var preview = $('<li class="weui-uploader_file weui-uploader_status" style="background-image:url(' + base64 + ')"><div class="weui-uploader_status_content">0%</div></li>');
+                        // $('.weui-uploader__files').empty();
+                        // $('.weui-uploader__files').append(preview);
+                        _that.empty();
+                        _that.append(preview);
+                        // 然后假装在上传，可以post base64格式，也可以构造blob对象上传，也可以用微信JSSDK上传
+                        var progress = 0;
+                        function uploading() {
+                            _that.find('.weui-uploader_status_content').text(++progress + '%');
+                            if (progress < 100) {
+                                setTimeout(uploading, 30);
+                            } else {
+                                // 如果是失败，塞一个失败图标
+                                //$preview.find('.weui_uploader_status_content').html('<i class="weui_icon_warn"></i>');
+                                preview.removeClass('weui-uploader_status').find('.weui-uploader_status_content').remove();
+                            }
+                        }
+                        setTimeout(uploading, 30);
+                    };
+                    let fileObj = _this[0].files[0];
+                    var formData = new FormData(); // FormData 对象
+                    formData.append('file', fileObj); // 文件对象
+                    $.ajax({
+                        url: config.requestUrl+'/incom-api/oss/upload',
+                        type:'POST',
+                        data:formData,
+                        dateType:'json',
+                        contentType:false,
+                        processData:false,
+                        success:function(ret){
+                            _that.children("li").attr('data-url',ret.data.url);
+                            _that.children("li").attr('data-fileName',ret.data.fileName);
+                        }
+                    });
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
+    var option = "<option value='0'>请选择</option>";
+    //区域三级联动
+    $("#license_p").on('change',function(){
+        let id = $(this).val();
+        var second_option_html = option;
+        $.each(license_p,function(k,v){
+            if(id == v.id){
+                license_c = v['children'];
+                $.each(v['children'],function(ck,cv){
+                    second_option_html += "<option value='"+cv.id+"'>"+cv.label+"</option>"
+                })
+            }
+        });
+        $("#license_c").children().remove();
+        $("#license_c").append(second_option_html);
+
+        $("#license_d").children().remove();
+        $("#license_d").append(option)
+    });
+    $("#license_c").on('change',function(){
+        let id = $(this).val();
+        var third_option_html = option;
+        $.each(license_c,function(k,v){
+            if(id == v.id){
+                license_d = v['children'];
+                $.each(v['children'],function(ck,cv){
+                    third_option_html += "<option value='"+cv.id+"'>"+cv.label+"</option>"
+                })
+            }
+        });
+        $("#license_d").children().remove();
+        $("#license_d").append(third_option_html)
+    });
+    //商户分类三级联动
+    $("#first_cate").on('change',function(){
+        let id = $(this).val();
+        var second_option_html = option;
+        $.each(mcc,function(k,v){
+            if(id == v.id){
+                secmcc = v['children'];
+                $.each(v['children'],function(ck,cv){
+                    second_option_html += "<option value='"+cv.id+"'>"+cv.label+"</option>"
+                })
+            }
+        });
+        $("#second_cate").children().remove();
+        $("#second_cate").append(second_option_html);
+
+        $("#third_cate").children().remove();
+        $("#third_cate").append(option)
+    });
+    $("#second_cate").on('change',function(){
+        let id = $(this).val();
+        var third_option_html = option;
+        $.each(secmcc,function(k,v){
+            if(id == v.id){
+                thirdmcc = v['children'];
+                $.each(v['children'],function(ck,cv){
+                    third_option_html += "<option value='"+cv.id+"'>"+cv.label+"</option>"
+                })
+            }
+        });
+        $("#third_cate").children().remove();
+        $("#third_cate").append(third_option_html)
+    });
+    //分行选择弹窗
+    function myopendiv(){
+        $('body').css('overflow','hidden');
+        document.getElementById('modal-backdrop').style.display ='block';
+        document.getElementById('myModal').style.display ='block';
+    }
+    function myclosediv(){
+        $('body').css('overflow','auto');
+        document.getElementById('modal-backdrop').style.display ='none';
+        document.getElementById('myModal').style.display ='none';
+    }
+    $("#searchcoms").on('change',function(){
+        let lbnkNm = $(this).val();
+        $.ajax({
+            url: config.requestUrl+'/incom-api/bank/queryBankInfo',
+            type:'GET',
+            data:{lbnkNm:lbnkNm},
+            contentType:"text/html;charset=utf8",
+            dateType:"json",
+            success:function(ret,status){
+                if(ret.data){
+                    let data = ret.data;
+                    let search_html = '';
+                    $.each(data,function(k,v){
+                        search_html += "<li value='"+v.wc_lbnk_no+"'><button class='choose_bank' type='button'>"+v.lbnk_nm+"</button></li>"
+                    });
+                    $(".resultlist ul").children().remove();
+                    $(".resultlist ul").append(search_html);
+                    $(".choose_bank").off('click');
+                    $(".choose_bank").on('click',function(){
+                        let wcLbnkNo = $(this).parent().attr('value');
+                        $("#wcLbnkNo").attr('value',wcLbnkNo);
+                        $("#wcLbnkNo").text($(this).text());
+                        myclosediv();
+                    });
+                }else{
+                    alert(ret.msg);
+                }
+            },
+        });
+    });
+    //提交
+    $(".weui-btn_primary").on('click',function(){
+        var _this = $(this);
+        console.log('提交');
+        let mercnm = $("#mercnm").val(); //商户名称
+        let stoeCntNm = $("#stoeCntNm").val(); //联系人名称
+        let stoeCntTel = $("#stoeCntTel").val(); //联系人电话
+       /*  let busLicNo = $("#busLicNo").val(); //营业执照号
+        let busExpDt = $("#busExpDt").val(); //营业执照有效期
+        let mercadds = $("#mercadds").val(); //营业执照详细地址
+        let crpNm = $("#crpNm").val(); //法人姓名
+        let crpIdNo = $("#crpIdNo").val(); //法人身份证号
+        let crpExpDt = $("#crpExpDt").val(); //法人身份证号有效期 */
+        let mccCd = $("#third_cate").val(); //商户类型(第三级)
+        let stoeAreaCod = $("#license_d").val(); //地区码(第三级)
+        let scanStoeCnm = $("#mercnm").val(); //门店名称
+        let stoeAdds = $("#stoeAdds").val(); //详细地址
+        let icrpIdNo = $("#icrpIdNo").val(); //结算人身份证号
+        let crpExpDtTmp = $("#crpExpDtTmp").val(); //结算人身份证号有效期
+        let bakAcnm = $("#bakAcnm").val(); //户名
+        let stlOac = $("#stlOac").val(); //结算银行卡号
+        let wcLbnkNo = $("#wcLbnkNo").attr('value'); //开户行代码
+        let weuiAgree = $("#weuiAgree").is(':checked'); //条款
+        //证件
+        /* let license = $("#license").parent().prev().children();  //营业执照 */
+        let handIdCard = $("#handIdCard").parent().prev().children(); //手持身份证
+        let idFront = $("#idFront").parent().prev().children(); //身份证正面
+        let idBack = $("#idBack").parent().prev().children(); //身份证背面
+        let cardFront = $("#cardFront").parent().prev().children(); //银行卡正面
+        let doorPhoto = $("#doorPhoto").parent().prev().children(); //结算人站门头照
+        let cashierPhoto = $("#cashierPhoto").parent().prev().children(); //收银台照
+        let contentPhoto = $("#contentPhoto").parent().prev().children(); //经营内容照
+        if(!mercnm){
+            $.toptip('商户名称不能为空','warning');
+            location.hash = "#mercnm";
+            return false;
+        }else if(!stoeCntNm){
+            $.toptip('联系人名称不能为空','warning');
+            location.hash = "#stoeCntNm";
+            return false;
+        }else if(!stoeCntTel){
+            $.toptip('联系人电话不能为空','warning');
+            location.hash = "#stoeCntTel";
+            return false;
+        }
+       /*  else if($(".license").length > 0){
+            $.toptip('上传营业执照','warning');
+            location.hash = "#license";
+            return false;
+        }else if(!busLicNo){
+            $.toptip('营业执照号不能为空','warning');
+            location.hash = "#busLicNo";
+            return false;
+        }else if(!busExpDt){
+            $.toptip('营业执照有效期不能为空','warning');
+            location.hash = "#busExpDt";
+            return false;
+        }else if(!mercadds){
+            $.toptip('营业执照详细地址不能为空','warning');
+            location.hash = "#mercadds";
+            return false;
+        } */
+        else if($(".handIdCard").length > 0){
+            $.toptip('请上传手持身份证照','warning');
+            location.hash = "#handIdCard";
+            return false;
+        }else if($(".idFront").length > 0){
+            $.toptip('请上传身份证人像面','warning');
+            location.hash = "#idFront";
+            return false;
+        }else if($(".idBack").length > 0){
+            $.toptip('请上传身份证国徽面','warning');
+            location.hash = "#idBack";
+            return false;
+        }
+        /* else if(!crpNm){
+            $.toptip('法人姓名不能为空','warning');
+            location.hash = "#crpNm";
+            return false;
+        }else if(!crpIdNo){
+            $.toptip('法人身份证不能为空','warning');
+            location.hash = "#crpIdNo";
+            return false;
+        }else if(!crpExpDt){
+            $.toptip('法人身份证有效期不能为空','warning');
+            location.hash = "#crpExpDt";
+            return false;
+        }*/
+        else if(!mccCd){
+            $.toptip('商户类型(第三级)不能为空','warning');
+            location.hash = "#third_cate";
+            return false;
+        } else if(!stoeAreaCod){
+            $.toptip('区域不能为空','warning');
+            location.hash = "#license_d";
+            return false;
+        }else if(!scanStoeCnm){
+            $.toptip('门店名称不能为空','warning');
+            location.hash = "#scanStoeCnm";
+            return false;
+        }else if(!stoeAdds){
+            $.toptip('详细地址不能为空','warning');
+            location.hash = "#stoeAdds";
+            return false;
+        }else if($(".cardFront").length > 0){
+            $.toptip('请上传银行卡正面','warning');
+            location.hash = "#cardFront";
+            return false;
+        }else if(!icrpIdNo){
+            $.toptip('结算人身份证号不能为空','warning');
+            location.hash = "#icrpIdNo";
+            return false;
+        }else if(!crpExpDtTmp){
+            $.toptip('结算人身份证号有效期不能为空','warning');
+            location.hash = "#stoeCntTel";
+            return false;
+        }else if(!bakAcnm){
+            $.toptip('户名不能为空','warning');
+            location.hash = "#bakAcnm";
+            return false;
+        }else if(!stlOac){
+            $.toptip('结算银行卡号不能为空','warning');
+            location.hash = "#stlOac";
+            return false;
+        }else if(!wcLbnkNo){
+            $.toptip('开户行代码不能为空','warning');
+            location.hash = "#wcLbnkNo";
+            return false;
+        }else if($(".doorPhoto").length > 0){
+            $.toptip('请上传门头照','warning');
+            location.hash = "#doorPhoto";
+            return false;
+        }else if($(".cashierPhoto").length > 0){
+            $.toptip('请上传收银台照','warning');
+            location.hash = "#cashierPhoto";
+            return false;
+        }else if($(".contentPhoto").length > 0){
+            $.toptip('请上传经营内容照','warning');
+            location.hash = "#contentPhoto";
+            return false;
+        }else if(!weuiAgree){
+            $.toptip('必须先确认条款','warning');
+            return false;
+        }
+        //合作商ID
+        let agentId = localStorage.getItem("id");
+        let inviteCode = $("#inviteCode").val();
+        let submitData = new FormData();
+        submitData.append('inviteCode',inviteCode);
+        submitData.append('agentId',agentId);
+        submitData.append('incomType',1);
+        submitData.append('mercnm',mercnm);
+        submitData.append('stoeCntNm',stoeCntNm);
+        submitData.append('stoeCntTel',stoeCntTel);
+        
+        submitData.append('busLicNo',icrpIdNo);
+        submitData.append('busExpDt',crpExpDtTmp);
+        /* submitData.append('mercadds',mercadds); */
+        //法人
+        submitData.append('crpNm',bakAcnm);
+        submitData.append('crpIdNo',icrpIdNo);
+        submitData.append('crpExpDt',crpExpDtTmp);
+        submitData.append('mccCd',mccCd);
+        submitData.append('stoeAreaCod',stoeAreaCod);
+        submitData.append('scanStoeCnm',scanStoeCnm);
+        submitData.append('stoeAdds',stoeAdds);
+        submitData.append('icrpIdNo',icrpIdNo);
+        submitData.append('crpExpDtTmp',crpExpDtTmp);
+        submitData.append('bakAcnm',bakAcnm);
+        submitData.append('stlOac',stlOac);
+        submitData.append('wcLbnkNo',wcLbnkNo);
+        //证件
+        let incomFiles = [];
+        /* let licenseObj = {'incomFileName':license.data('filename'),'incomFileUrl':license.data('url'),'subType':1}; */
+        let handIdCardObj = {'incomFileName':handIdCard.data('filename'),'incomFileUrl':handIdCard.data('url'),'subType':13};
+        let idFrontObj = {'incomFileName':idFront.data('filename'),'incomFileUrl':idFront.data('url'),'subType':9};
+        let idBackObj = {'incomFileName':idBack.data('filename'),'incomFileUrl':idBack.data('url'),'subType':10};
+        let cardFrontObj = {'incomFileName':cardFront.data('filename'),'incomFileUrl':cardFront.data('url'),'subType':11};
+        let doorPhotoObj = {'incomFileName':doorPhoto.data('filename'),'incomFileUrl':doorPhoto.data('url'),'subType':6};
+        let cashierPhotoObj = {'incomFileName':cashierPhoto.data('filename'),'incomFileUrl':cashierPhoto.data('url'),'subType':8};
+        let contentPhotoObj = {'incomFileName':contentPhoto.data('filename'),'incomFileUrl':contentPhoto.data('url'),'subType':7};
+        let licenseObj = {'incomFileName':idFront.data('filename'),'incomFileUrl':idFront.data('url'),'subType':1};
+        let frFrontObj = {'incomFileName':idFront.data('filename'),'incomFileUrl':idFront.data('url'),'subType':4};
+        let frBackObj = {'incomFileName':idBack.data('filename'),'incomFileUrl':idBack.data('url'),'subType':5};
+
+        incomFiles.push(handIdCardObj,idFrontObj,idBackObj,cardFrontObj,doorPhotoObj,cashierPhotoObj,contentPhotoObj,licenseObj,frFrontObj,frBackObj);
+        let jsonData = {};
+        submitData.forEach((value, key) => jsonData[key] = value);
+        jsonData['incomFiles'] = incomFiles;
+
+        _this.addClass("weui-btn_loading");
+        $.ajax({
+            url: config.requestUrl+'/incom-api/incom/merchantSubIncom',
+            type:'POST',
+            data:JSON.stringify(jsonData),
+            dateType:'json',
+            contentType:"application/json",
+            processData:false,
+            beforeSend:function(request){
+                request.setRequestHeader("token",getCookie('token'));
+            },
+            success:function(ret){
+                if(ret.code == 'C0'){
+                    $.toptip('提交成功');
+                    window.location.href= 'chooseUser.html';
+                }else{
+                    alert(ret.msg);
+                    _this.removeClass("weui-btn_loading");
+                }
+            }
+        });
+    })
+</script>
+</html>

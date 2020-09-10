@@ -1,0 +1,8 @@
+#RewriteEngine On
+#RewriteCond %{HTTP_REFERER} !^http://xxroom.xyz.*$ [NC]
+#RewriteCond %{HTTP_REFERER} !^http://xxroom.xyz$ [NC]
+#RewriteCond %{HTTP_REFERER} !^https://www.xxroom.xyz.*$ [NC]
+#RewriteCond %{HTTP_REFERER} !^https://www.xxroom.xyz$ [NC]
+#RewriteRule .*.(gif|jpg|png|swf|jpeg|bmp)$ /assets/images/err.png [L,R,NC]
+
+##RewriteRule ^(.*)$ https://www.xxroom.xyz/assets/image/$1 [L]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>商戶信息</title>
+    <link rel="stylesheet" href="./assets/weui/css/weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/style.css">
+    <link rel="stylesheet" href="./assets/weui/css/modal.css">
+    <link rel="stylesheet" href="./assets/weui/css/base.css">
+    <script src="./assets/weui/js/jquery.min.js"></script>
+    <script src="./assets/weui/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/weui/js/city-picker.min.js" charset="utf-8"></script>
+    <script src="./assets/static/js/functions.js"></script>
+</head>
+<script> $(function(){checkLogin();});</script>
+<body>
+    <header class="demos-header">
+        <h1 class="demos-title">个人中心</h1>
+    </header>
+    <div class="weui-grids">
+        <a href="chooseUser.html" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="./assets/weui/images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                我要进件
+            </p>
+        </a>
+        <a href="jinjian.html" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="./assets/weui/images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                进件列表
+            </p>
+        </a>
+        <a class="weui-grid js_grid loginOut">
+            <div class="weui-grid__icon">
+<!--                <img src="./assets/weui/images/icon_nav_cell.png" alt="">-->
+                <i class="weui-icon-cancel"></i>
+            </div>
+            <p class="weui-grid__label">
+                退出登录
+            </p>
+        </a>
+    </div>
+</body>
+<script>
+    var center = {
+        loginOut : function(){
+            $(".loginOut").on('click',function(){
+                loginOut();
+            });
+        }
+    };
+    $(document).ready(function(){
+        center.loginOut()
+    });
+</script>
+</html>

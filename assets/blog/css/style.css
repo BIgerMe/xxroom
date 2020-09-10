@@ -1,0 +1,119 @@
+@charset "utf-8";
+body{
+    font-family: "Microsoft Yahei UI",Verdana, Arial, Helvetica,SimHei,simsun,sans-serif;
+    color :#666;
+}
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+.logo{
+    /*padding: 0;*/
+}
+#footer{
+    background-color:#333;
+    /*border-top:1px solid #ccc;*/
+    padding:20px;
+    text-align: center;
+    color:#eee;
+}
+/*小屏幕(平板,大于等于768螃蟹px)*/
+@media(min-width:768px){
+    .tab-h2{
+        font-size: 26px;
+    }
+    .tab-p{
+        font-size: 16px;
+    }
+    .text h3{
+        font-size:22px;
+    }
+    .text p{
+        font-size:15px;
+    }
+    .tab2-text{
+        float: left;
+    }
+    .tab2-img{
+        float:right;
+    }
+    .jumbotron h1{
+        font-size: 30px;
+    }
+    .jumbotron h4{
+        font-size: 16px;
+    }
+    .info-content h4{
+        font-size: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    #about h3{
+        font-size: 19px;
+    }
+    #about p{
+        font-size:14px
+    }
+}
+@media(min-width:992px){
+    .tab-h2{
+        font-size: 28px;
+    }
+    .tab-p{
+        font-size: 17px;
+    }
+    .text h3{
+        font-size:24px;
+    }
+    .text p{
+        font-size:16px;
+    }
+    .jumbotron h1{
+        font-size: 33px;
+    }
+    .jumbotron h4{
+        font-size: 17px;
+    }
+    .info-content h4{
+        font-size: 17px;
+    }
+    #about h3{
+         font-size: 20px;
+     }
+    #about p{
+        font-size:15px
+    }
+}
+@media(min-width:1200px){
+    .tab-h2{
+        font-size: 30px;
+    }
+    .tab-p{
+        font-size: 18px;
+    }
+    .text h3{
+        font-size:26px;
+    }
+    .text p{
+        font-size:18px;
+    }
+    .jumbotron h1{
+        font-size: 36px;
+    }
+    .jumbotron h4{
+        font-size: 18px;
+    }
+    .info-content h4{
+        font-size: 18px;
+    }
+    #about h3{
+        font-size: 22px;
+    }
+    #about p{
+        font-size:16px
+    }
+}
+
+
+

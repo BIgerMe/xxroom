@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<div id="head"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>商戶信息</title>
+    <link rel="stylesheet" href="./assets/weui/css/weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/style.css">
+    <link rel="stylesheet" href="./assets/weui/css/modal.css">
+    <link rel="stylesheet" href="./assets/weui/css/base.css">
+    <script src="./assets/weui/js/jquery.min.js"></script>
+    <script src="./assets/weui/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/weui/js/city-picker.min.js" charset="utf-8"></script>
+    <script src="./assets/static/js/functions.js"></script>
+</head>
+<body>
+<header class="demos-header">
+    <h1 class="demos-title">登录</h1>
+</header>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">账户</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input type="text" id="username" class="weui-input" autocomplete="off" placeholder="请输入账号"/>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input type="password" id="password" class="weui-input" autocomplete="off" placeholder="请输入密码"/>
+        </div>
+    </div>
+</div>
+<div class="weui-cells__tips"></div>
+<div class="weui-btn-area">
+    <button type="button" class="weui-btn weui-btn_primary">登录</button>
+</div>
+</body>
+<script>
+    $(document).ready(function(){
+        login.checkLogin();
+        login.submit();
+    });
+    let login = {
+        checkLogin:function(){
+            if(getCookie('token')  && getCookie('loginUser')){
+                location.href = 'center.html';
+            }
+        },
+        submit:function(){
+            $(".weui-btn_primary").on('click',function(){
+                let username = $("#username").val();
+                let password = $("#password").val();
+                $.ajax({
+                    url: config.requestUrl+'/incom-api/login',
+                    type:'POST',
+                    data:JSON.stringify({username:username,password:password}),
+                    dateType:'json',
+                    contentType:"application/json",
+                    processData:false,
+                    success:function(ret){
+                        if(ret.code == 'C0'){
+                            $.toptip('登录成功','success');
+                            setCookie('loginUser',ret.data.loginUser);
+                            setCookie('token',ret.data.token);
+                            setTimeout(function(){
+                                location.href='center.html';
+                            },1000)
+                        }else{
+                            $.toptip(ret.msg,'error');
+                        }
+                    }
+                });
+            })
+        }
+    };
+
+</script>
+</html>

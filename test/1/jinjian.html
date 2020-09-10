@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>商戶信息</title>
+    <link rel="stylesheet" href="./assets/weui/css/weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="./assets/weui/css/style.css">
+    <link rel="stylesheet" href="./assets/weui/css/modal.css">
+    <link rel="stylesheet" href="./assets/weui/css/base.css">
+    <script src="./assets/weui/js/jquery.min.js"></script>
+    <script src="./assets/weui/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/weui/js/city-picker.min.js" charset="utf-8"></script>
+    <script src="./assets/static/js/functions.js"></script>
+</head>
+<script> $(function(){checkLogin();});</script>
+<body>
+<!-- 容器 -->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" href="#waitLists">
+            待审核
+        </a>
+        <a class="weui-navbar__item" href="#passLists">
+            审核通过
+        </a>
+        <a class="weui-navbar__item" href="#rejectLists">
+            驳回
+        </a>
+        <a class="weui-navbar__item" href="#personLists">
+            转人工
+        </a>
+    </div>
+    <div class="weui-tab__bd">
+        <div id="waitLists" class="weui-tab__bd-item weui-tab__bd-item--active"></div>
+        <div id="passLists" class="weui-tab__bd-item"></div>
+        <div id="rejectLists" class="weui-tab__bd-item"></div>
+        <div id="personLists" class="weui-tab__bd-item"></div>
+    </div>
+</div>
+</body>
+<script>
+    var jinjian = {
+        list : function(){
+            $.ajax({
+                url: config.requestUrl+'/incom-api/incom/merchantList',
+                type:'GET',
+                data:{},
+                contentType:"text/html;charset=utf8",
+                dateType:"jsonp",
+                beforeSend:function(request){
+                    request.setRequestHeader("token",getCookie('token'));
+                },
+                success:function(ret){
+                    if(ret.code == 'C0'){
+                        if(ret.mcc){
+                            $.each(ret.mcc,function(k,v){
+                                if(v.length > 0){
+                                    let _table = "";
+                                    $.each(v,function(ck,cv){
+                                        let _isd0 = ""
+                                        if(cv.isD0 == '0'){
+                                            _isd0 = "<ul class='weui-media-box__info'><li>未开通D0<i class='weui-icon-warn'></i></li></ul>";
+                                        }else if(cv.isD0 == '1'){
+                                            _isd0 = "<ul class='weui-media-box__info'><li>已开通D0<i class='weui-icon-success'></i></li></ul>";
+                                        }else if(cv.isD0 == '2'){
+                                            _isd0 = "<ul class='weui-media-box__info'><li>已关闭D0<i class='weui-icon-cancel'></i></li></ul>";
+                                        }else{}
+                                        _table += "<div class='page__bd'>\n" +
+                                            "                <div class='weui-panel weui-panel_access'>\n" +
+                                            "                    <div class='weui-panel__bd'>\n" +
+                                            "                        <div class='weui-media-box weui-media-box_text'>\n" +
+                                            "                            <h5 class='weui-media-box__title'>商户名称："+cv.merchantName+"</h5>\n" +
+                                            "                            <ul class='weui-media-box__info'>\n" +
+                                            "                                <li class='weui-media-box__info__meta'>门店名称</li>\n" +
+                                            "                                <li class='weui-media-box__info__meta'>"+cv.storeName+"</li>\n" +
+                                            "                            </ul>\n" +
+                                            "                            <ul class='weui-media-box__info'>\n" +
+                                            "                                <li class='weui-media-box__info__meta'>创建时间</li>\n" +
+                                            "                                <li class='weui-media-box__info__meta'>"+cv.createDate+"</li>\n" +
+                                            "                            </ul>\n" + _isd0 +
+                                            "                        </div>\n" +
+                                            "                    </div>\n" +
+                                            "                </div>\n" +
+                                            "            </div>"
+                                    });
+                                    $("#"+k).children().remove();
+                                    $("#"+k).append(_table);
+                                }else{
+                                    let _empty = "<div class='weui-panel weui-panel_access'><div class='weui-panel__hd'>暂无内容</div></div>";
+                                    $("#"+k).children().remove();
+                                    $("#"+k).append(_empty);
+                                }
+                            });
+                        }
+                    }else{
+                        $.toptip(ret.msg,'error');
+                    }
+                }
+            });
+        }
+    };
+    $(document).ready(function(){
+        jinjian.list();
+    });
+</script>
+</html>
